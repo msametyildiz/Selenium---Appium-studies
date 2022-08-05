@@ -1,0 +1,35 @@
+
+using NUnit.Framework;
+using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.Windows;
+using System;
+public class Tests
+{
+    public const string DriverUrl = "http://127.0.0.1:4723/";
+    public WindowsDriver<WindowsElement> DesktopSession;
+
+
+    [SetUp]
+    public void Setup()
+    {
+        AppiumOptions Options = new AppiumOptions();
+        Options.AddAdditionalCapability("app", "C:\Users\samet\Desktop\Server-OneServer-V5.22.166.01.exe");
+        Options.AddAdditionalCapability("deviceName", "WindowsPC");
+        DesktopSession = new WindowsDriver<WindowsElement>(new Uri(DriverUrl), Options);
+        Assert.IsNotNull(DesktopSession);
+    }
+
+    [Test]
+    public void Test()
+    {
+
+
+        Assert.Pass();
+    }
+    [TearDown]
+    public void Close()
+    {
+        DesktopSession.CloseApp();
+    }
+}
+}

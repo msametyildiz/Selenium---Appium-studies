@@ -1,0 +1,83 @@
+using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Remote;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TestingApp
+{
+    internal class Program
+    {
+        public static string WindowsApplicationDriverUrl = "http://127.0.0.1:4723";
+        public static object OneServerSetupId = @"C:\Users\samet\OneDrive\Masaüstü\Server-OneServer-V5.22.166.01.exe";
+
+        static void Main(string[] args)
+        {   
+            WindowsDriver<WindowsElement> session;
+            WindowsDriver<WindowsElement> desktopSession;
+            //DesiredCapabilities dc = new DesiredCapabilities();
+            //dc.SetCapability("app", @"D:\Server-OneServer-V5.22.166.01.exe");
+
+            //dc.SetCapability("DeviceId", "WindowsPC");
+            //session = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), dc);
+
+            //WindowsElement we = bioAffix.FindElementByName("Tamam");
+            // bioAffix.FindElementByName("Tamam").Click();
+            //bioAffix.FindElementById("14824").Click();
+            // bioAffix.FindElementByAccessibilityId("23328").Click();
+
+
+
+
+            try
+            {
+                DesiredCapabilities appCapabilities = new DesiredCapabilities();
+                appCapabilities.SetCapability("app", OneServerSetupId);
+                appCapabilities.SetCapability("deviceName", "WindowsPC");
+                session = new WindowsDriver<WindowsElement>(new Uri(WindowsApplicationDriverUrl), appCapabilities);
+            }
+            catch
+            {
+                DesiredCapabilities desktopCapabilities = new DesiredCapabilities();
+                desktopCapabilities.SetCapability("app",
+                                                  "Root");
+                desktopCapabilities.SetCapability("deviceName", "WindowsPC");
+                desktopSession = new WindowsDriver<WindowsElement>(new Uri(WindowsApplicationDriverUrl), desktopCapabilities);
+
+                var a = desktopSession.FindElementsByName("Kurulum Yardımcısı Dilini Seçin");
+                var AppTopLevelWindow = desktopSession.FindElementByClassName("TSelectLanguageForm");
+                var AppTopLevelWindowHandle = AppTopLevelWindow.GetAttribute("NativeWindowHandle");
+                AppTopLevelWindowHandle = (int.Parse(AppTopLevelWindowHandle)).ToString("x");
+
+                DesiredCapabilities appCapabilities = new DesiredCapabilities();
+                appCapabilities.SetCapability("appTopLevelWindow", AppTopLevelWindowHandle);
+                appCapabilities.SetCapability("deviceName", "WindowsPC");
+                session = new WindowsDriver<WindowsElement>(new Uri(WindowsApplicationDriverUrl), appCapabilities);
+
+            }
+
+
+            WindowsElement we = session.FindElementByName("Tamam");
+
+
+
+            if (session == null)
+            {
+                Console.Write("No App");
+                return;
+
+            }
+
+
+
+
+
+
+
+
+        }
+    }
+}

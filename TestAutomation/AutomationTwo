@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
+
+namespace _19._07._22_test_4
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            IWebDriver driver = new ChromeDriver();
+            // driver.Navigate().GoToUrl("http://google.com");
+            // driver.FindElement(By.Name("q")).SendKeys("Muhammed Samet Yıldız");
+            // driver.FindElement(By.Name("q")).Submit();
+            // driver.Navigate().GoToUrl("https://www.n11.com/");
+            // driver.FindElement(By.Id("searchData")).SendKeys("samsung");
+            // driver.FindElement(By.ClassName("iconsSearch")).Click();
+            // driver.FindElement(By.@ClassName("pagination/a[3]")).Click();
+
+
+            driver.Navigate().GoToUrl("http://localhost/proje/index.php#menu");
+            //             
+            driver.FindElement(By.ClassName("sign-in")).Click();
+            driver.FindElement(By.Name("usrnm")).SendKeys("admin");
+            driver.FindElement(By.Name("psw")).SendKeys("12345");
+            driver.FindElement(By.ClassName("btnLogin")).Click();
+
+            //                
+               //            driver.FindElement(By.Id("iletisimid")).Click();
+            //driver.FindElement(By.Name("isim")).SendKeys("Muhammed Samet Yildiz");
+            //driver.FindElement(By.Name("tel")).SendKeys("05051059001");
+            //driver.FindElement(By.Name("mail")).SendKeys("mail.mail@mail.com");
+            //driver.FindElement(By.Name("konu")).SendKeys("Topic");
+            //driver.FindElement(By.Name("mesaj")).SendKeys("Merhaba");
+            //driver.FindElement(By.Name("GonderButton")).Click();
+
+
+           // driver.Navigate().GoToUrl("http://n11.com/");
+           // driver.FindElement(By.Id("searchData")).SendKeys("samsung");
+          //  driver.FindElement(By.ClassName("iconsSearch")).Click();
+          //   driver.FindElement(By.XPath(".//*[@class='pagination']/a[2]")).Click();
+        }
+    }
+}
